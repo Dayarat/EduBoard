@@ -11,7 +11,7 @@ echarts.use([TooltipComponent, GaugeChart, SVGRenderer]);
 type EChartsOption = echarts.ComposeOption<TooltipComponentOption | GaugeSeriesOption>;
 
 interface ChartProps {
-  data: { color: string; value: number; max: number };
+  data: { color: string; value: number; max: number; unit: string };
   isHovered: boolean;
   style?: {
     height?: number;
@@ -20,7 +20,7 @@ interface ChartProps {
 }
 
 const FactorChart = ({ data: doughnutChartData, isHovered, style }: ChartProps) => {
-  const { color, value, max } = doughnutChartData;
+  const { color, value, max, unit } = doughnutChartData;
 
   const theme = useTheme();
 
@@ -36,7 +36,7 @@ const FactorChart = ({ data: doughnutChartData, isHovered, style }: ChartProps) 
           endAngle: -35,
           radius: '100%',
           detail: {
-            formatter: (value: number) => (value < 100 ? `${value}%` : `${value}k`),
+            formatter: (value: number) => (value < 100 ? `${value}${unit}` : `${value}k`),
             offsetCenter: [0, 0],
             fontSize: theme.typography.fontSize + 10,
             fontFamily: theme.typography.caption.fontFamily,

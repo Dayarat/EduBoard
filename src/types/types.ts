@@ -37,8 +37,10 @@ export interface IFactor {
   id: number;
   icon: (props: SvgIconProps) => JSX.Element;
   title: string;
+  subTitle?: string;
   color: string;
   value: number;
+  unit: string;
   max?: number;
 }
 

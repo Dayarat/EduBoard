@@ -12,7 +12,9 @@ const Login = lazy(() => import('pages/authentication/Login'));
 const Signup = lazy(() => import('pages/authentication/Signup'));
 const ErrorPage = lazy(() => import('pages/errors/ErrorPage'));
 
-export const routes = [
+import { Navigate } from 'react-router-dom';
+
+const routes = [
   {
     element: (
       <Suspense fallback={<Progress />}>
@@ -22,19 +24,7 @@ export const routes = [
     children: [
       {
         path: rootPaths.root,
-        element: (
-          <MainLayout>
-            <Suspense fallback={<LinearLoader />}>
-              <Outlet />
-            </Suspense>
-          </MainLayout>
-        ),
-        children: [
-          {
-            index: true,
-            element: <Dashboard />,
-          },
-        ],
+        element: <Navigate to={paths.login} replace />,
       },
       {
         path: rootPaths.authRoot,
@@ -47,6 +37,22 @@ export const routes = [
           {
             path: paths.signup,
             element: <Signup />,
+          },
+        ],
+      },
+      {
+        path: rootPaths.dashboard,
+        element: (
+          <MainLayout>
+            <Suspense fallback={<LinearLoader />}>
+              <Outlet />
+            </Suspense>
+          </MainLayout>
+        ),
+        children: [
+          {
+            index: true,
+            element: <Dashboard />,
           },
         ],
       },

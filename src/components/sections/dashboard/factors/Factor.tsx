@@ -8,7 +8,7 @@ const Factor = ({ factor }: { factor: IFactor }) => {
 
   const [isHovered, setIsHovered] = useState(false);
 
-  const { icon: Icon, color, title, value, max = 100 } = factor;
+  const { icon: Icon, color, title, value, max = 100, subTitle, unit } = factor;
 
   const [paletteOption, simplePaletteColorOption] = color.split('.') as [
     keyof typeof theme.palette,
@@ -16,7 +16,7 @@ const Factor = ({ factor }: { factor: IFactor }) => {
   ];
 
   const factorColor = theme.palette[paletteOption][simplePaletteColorOption];
-  const doughnutChartData = { color: factorColor, value, max };
+  const doughnutChartData = { color: factorColor, value, max, unit };
 
   return (
     <Paper
@@ -50,6 +50,11 @@ const Factor = ({ factor }: { factor: IFactor }) => {
             <Icon sx={[isHovered ? { color: 'grey.100' } : { color: factorColor }]} />
           </Stack>
           <Typography variant="h2">{title}</Typography>
+          {subTitle && (
+            <Typography variant="h6" fontSize={12}>
+              {subTitle}
+            </Typography>
+          )}
         </Stack>
 
         <FactorChart

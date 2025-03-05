@@ -12,33 +12,45 @@ interface IReminderData {
 export const columns: GridColDef<(typeof rows)[number]>[] = [
   {
     field: 'description',
-    headerName: 'Description',
+    headerName: 'Student ID',
     flex: 1.5,
     minWidth: 200,
   },
   {
     field: 'due',
-    headerName: 'Due',
+    headerName: 'Study Hours',
     flex: 1,
     minWidth: 150,
     sortable: false,
   },
   {
     field: 'overdue',
-    headerName: 'Overdue',
+    headerName: 'Extracurricular Hours',
     flex: 1,
     minWidth: 150,
     sortable: false,
   },
   {
     field: 'notify',
-    headerName: 'Notify',
+    headerName: 'Sleep Hours',
     flex: 1,
     minWidth: 150,
   },
   {
     field: 'status',
-    headerName: 'Status',
+    headerName: 'Social Hours',
+  },
+  {
+    field: 'status',
+    headerName: 'Physical Acitivity Hours',
+  },
+  {
+    field: 'status',
+    headerName: 'GPA',
+  },
+  {
+    field: 'status',
+    headerName: 'Stress Level',
   },
 ];
 

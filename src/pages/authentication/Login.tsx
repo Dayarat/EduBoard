@@ -17,6 +17,7 @@ import PasswordTextField from 'components/common/PasswordTextField';
 import Facebook from 'components/icons/authentication/Facebook';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import paths from 'routes/paths';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginFormValues {
   email: string;
@@ -27,7 +28,19 @@ const checkBoxLabel = { inputProps: { 'aria-label': 'Checkbox' } };
 
 const Login = () => {
   const { register, handleSubmit } = useForm<LoginFormValues>();
-  const onSubmit: SubmitHandler<LoginFormValues> = (data) => console.log(data);
+  const navigate = useNavigate();
+
+  const onSubmit: SubmitHandler<LoginFormValues> = (data) => {
+    if (data.email === 'parent10@gmail.com' && data.password === '12345678') {
+      navigate('/dashboard', { state: { index: 10 } });
+    } else if (data.email === 'student20@gmail.com' && data.password === '12345678') {
+      navigate('/dashboard', { state: { index: 20 } });
+    } else if (data.email === 'parent30@gmail.com' && data.password === '12345678') {
+      navigate('/dashboard', { state: { index: 30 } });
+    } else if (data.email === 'test@gmail.com' && data.password === '12345678') {
+      navigate('/dashboard', { state: { index: undefined } });
+    }
+  };
 
   return (
     <Box sx={{ width: { xs: 1, sm: 506 }, px: { xs: 2, sm: 0 }, py: 10 }}>
