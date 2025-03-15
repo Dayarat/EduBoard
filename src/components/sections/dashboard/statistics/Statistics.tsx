@@ -3,7 +3,7 @@ import ScatterPlotStdTvGpa from './ScatterPlotStdTvGpa';
 import ScatterPlotSlpTvGpa from './ScatterPlotSlpTvGpa';
 import StudyHoursDistribution from './StudyHoursDistribution';
 import GPAvsStressLevel from './GPAvsStressLevel';
-import StressLevelDistribution from './StressLevelDistribution';
+// import StressLevelDistribution from './StressLevelDistribution';
 
 const Statistics = () => {
   return (
@@ -22,9 +22,9 @@ const Statistics = () => {
       <Grid item xs={12} lg={6}>
         <ScatterPlotSlpTvGpa />
       </Grid>
-      <Grid item xs={12} lg={6}>
+      {/* <Grid item xs={12} lg={6}>
         <StressLevelDistribution />
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 };

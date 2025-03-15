@@ -1,4 +1,4 @@
-import { Box, Link, Typography } from '@mui/material';
+import { Link, Typography } from '@mui/material';
 
 const Footer = () => {
   return (
@@ -8,9 +8,9 @@ const Footer = () => {
       sx={{ pt: 3.75, textAlign: { xs: 'center', md: 'right' } }}
     >
       {/* Made with{' '} */}
-      <Box component="span" sx={{ color: 'error.main', verticalAlign: 'middle' }}>
+      {/* <Box component="span" sx={{ color: 'error.main', verticalAlign: 'middle' }}>
         &#10084;
-      </Box>{' '}
+      </Box>{' '} */}
       {/* by{' '} */}
       <Link
         href="https://themewagon.com/"
