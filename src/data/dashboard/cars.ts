@@ -13,7 +13,7 @@ export const cars: ICar[] = [
     modelName: 'ABC',
     mileage: 132,
     costPerHour: 32,
-    backgroundColor: 'warning.lighter',
+    backgroundColor: 'primary.lighter',
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ export const cars: ICar[] = [
     modelName: 'DEF',
     mileage: 130,
     costPerHour: 28,
-    backgroundColor: 'primary.lighter',
+    backgroundColor: 'warning.lighter',
   },
   {
     id: 3,

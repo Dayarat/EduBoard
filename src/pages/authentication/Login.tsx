@@ -31,8 +31,8 @@ const Login = () => {
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<LoginFormValues> = (data) => {
-    if (data.email === 'parent10@gmail.com' && data.password === '12345678') {
-      navigate('/dashboard', { state: { index: 10 } });
+    if (data.email === 'teacher@gmail.com' && data.password === '12345678') {
+      navigate('/dashboard', { state: { index: undefined } });
     } else if (data.email === 'student20@gmail.com' && data.password === '12345678') {
       navigate('/dashboard', { state: { index: 20 } });
     } else if (data.email === 'parent30@gmail.com' && data.password === '12345678') {

@@ -3,13 +3,14 @@ import IconifyIcon from 'components/base/IconifyIcon';
 import AccountMenu from './AccountMenu';
 // import LanguagePopover from './LanguagePopover';
 
-import OutlinedBadge from 'components/styled/OutlinedBadge';
+// import OutlinedBadge from 'components/styled/OutlinedBadge';
 import SearchBox from 'components/common/SearchBox';
 import { rootPaths } from 'routes/paths';
 import Logo from 'components/icons/common/Logo';
 import ElevationScroll from './ElevationScroll';
 import Search from 'components/icons/common/Search';
-import Notification from 'components/icons/appbar/Notification';
+// import Notification from 'components/icons/appbar/Notification';
+import NotificationMenu from '../../../components/sections/dashboard/statistics/NotificationMenu'; // ✅ Import NotificationMenu
 
 interface TopBarProps {
   drawerWidth: number;
@@ -52,11 +53,10 @@ const TopBar = ({ drawerWidth, onHandleDrawerToggle }: TopBarProps) => {
 
           <Stack direction="row" alignItems="center" columnGap={{ xs: 1, sm: 2, md: 3 }}>
             {/* <LanguagePopover /> */}
-            <IconButton aria-label="notifications" color="inherit">
-              <OutlinedBadge badgeContent=" " color="error" variant="dot" overlap="circular">
-                <Notification />
-              </OutlinedBadge>
-            </IconButton>
+
+            {/* ✅ Notification Button with Menu */}
+            <NotificationMenu />
+
             <AccountMenu />
           </Stack>
         </Toolbar>

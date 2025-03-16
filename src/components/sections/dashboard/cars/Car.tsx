@@ -2,16 +2,16 @@ import { Box, Paper, Typography } from '@mui/material';
 import { ICar } from 'types/types';
 import StressLevelDistribution from '../statistics/StressLevelDistribution';
 import GPAChart from '../statistics/ERPvsGPA';
-import ActivityDistribution from '../statistics/GPAvsStressLevel';
+import ActivityDistribution from '../statistics/StudyvsExtra';
 
 const Car = ({ car }: { car: ICar }) => {
   const { backgroundColor, id } = car;
 
   const chartTitle =
     id === 1
-      ? 'Stress Level Distribution'
+      ? 'GPA Distribution'
       : id === 2
-        ? 'GPA Distribution'
+        ? 'Stress Level Distribution'
         : 'Activity Distribution';
 
   return (
@@ -20,8 +20,8 @@ const Car = ({ car }: { car: ICar }) => {
         {chartTitle}
       </Typography>
       <Box>
-        {id === 1 && <StressLevelDistribution />}
-        {id === 2 && <GPAChart />}
+        {id === 1 && <GPAChart />}
+        {id === 2 && <StressLevelDistribution />}
         {id === 3 && <ActivityDistribution />}
       </Box>
     </Paper>
