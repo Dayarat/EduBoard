@@ -1,64 +1,45 @@
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Badge, IconButton, Menu, MenuItem, Typography } from '@mui/material';
-import Notification from 'components/icons/appbar/Notification';
+import IconifyIcon from 'components/base/IconifyIcon';
 
-const NotificationMenu = () => {
-  const [notifications, setNotifications] = useState<string[]>([]);
+interface NotificationMenuProps {
+  alerts: string[]; // Add alerts as a prop
+}
+
+const NotificationMenu = ({ alerts }: NotificationMenuProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
 
-  useEffect(() => {
-    const studentDataString = localStorage.getItem('studentData');
-    if (!studentDataString) return;
-
-    const student = JSON.parse(studentDataString);
-    const newNotifications: string[] = [];
-
-    if (student.stress === 'High') {
-      newNotifications.push(`${student.student} has a HIGH stress level!`);
-    }
-    if (parseFloat(student.study) > 8) {
-      newNotifications.push(`${student.student} is studying more than 8 hours.`);
-    }
-    if (parseFloat(student.sleep) < 5) {
-      newNotifications.push(`${student.student} is sleeping less than 5 hours.`);
-    }
-
-    setNotifications(newNotifications);
-  }, []);
-
-  const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
+  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleMenuClose = () => {
     setAnchorEl(null);
   };
 
   return (
     <>
-      <IconButton aria-label="notifications" color="inherit" onClick={handleOpen}>
-        <Badge badgeContent={notifications.length} color="error">
-          <Notification />
+      <IconButton color="inherit" onClick={handleMenuOpen}>
+        <Badge badgeContent={alerts.length} color="error">
+          <IconifyIcon icon="mdi:bell-outline" /> {/* Use your existing icon */}
         </Badge>
       </IconButton>
 
       <Menu
         anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          sx: { width: 300, maxHeight: 300 },
-        }}
+        open={Boolean(anchorEl)}
+        onClose={handleMenuClose}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
-        {notifications.length > 0 ? (
-          notifications.map((notif, index) => (
-            <MenuItem key={index} onClick={handleClose}>
-              <Typography variant="body2">{notif}</Typography>
+        {alerts.length > 0 ? (
+          alerts.map((alert, index) => (
+            <MenuItem key={index} onClick={handleMenuClose}>
+              <Typography variant="body2">{alert}</Typography>
             </MenuItem>
           ))
         ) : (
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={handleMenuClose}>
             <Typography variant="body2">No new notifications</Typography>
           </MenuItem>
         )}

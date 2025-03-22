@@ -19,13 +19,13 @@ import CustomPagination from 'components/common/CustomPagination';
 export interface IReminderData {
   id: number;
   student: string;
-  study: string;
-  extra: string;
-  sleep: string;
-  social: string;
-  physical: string;
-  gpa: string;
-  stress: string;
+  study: string; // Study_Hours_Per_Day
+  extra: string; // Extracurricular_Hours_Per_Day
+  sleep: string; // Sleep_Hours_Per_Day
+  social: string; // Social_Hours_Per_Day
+  physical: string; // Physical_Activity_Hours_Per_Day
+  gpa: string; // GPA
+  stress: string; // Stress_Level
 }
 
 interface ReminderTableProps {
@@ -35,13 +35,7 @@ interface ReminderTableProps {
 export const columns: GridColDef[] = [
   { field: 'student', headerName: 'Student ID', flex: 1.5, minWidth: 120 },
   { field: 'study', headerName: 'Study', flex: 1, minWidth: 150, sortable: false },
-  {
-    field: 'extra',
-    headerName: 'Extracurricular',
-    flex: 1,
-    minWidth: 150,
-    sortable: false,
-  },
+  { field: 'extra', headerName: 'Extracurricular', flex: 1, minWidth: 150, sortable: false },
   { field: 'sleep', headerName: 'Sleep', flex: 1, minWidth: 150 },
   { field: 'social', headerName: 'Social', flex: 1, minWidth: 150 },
   { field: 'physical', headerName: 'Physically Active', flex: 1, minWidth: 150 },
@@ -68,7 +62,11 @@ const ReminderTable: React.FC<ReminderTableProps> = ({ rows }) => {
   const handleClose = () => setOpen(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = () => {
@@ -103,6 +101,7 @@ const ReminderTable: React.FC<ReminderTableProps> = ({ rows }) => {
       </Box>
 
       <CustomPagination apiRef={apiRef} />
+
       {/* Add New Entry Dialog */}
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
         <DialogTitle>Add New Student Data</DialogTitle>
@@ -116,6 +115,7 @@ const ReminderTable: React.FC<ReminderTableProps> = ({ rows }) => {
                   label={key.charAt(0).toUpperCase() + key.slice(1)}
                   name={key}
                   fullWidth
+                  value={formData[key as keyof IReminderData]}
                   onChange={handleChange}
                 />
               ),

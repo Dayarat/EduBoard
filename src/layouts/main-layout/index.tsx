@@ -3,12 +3,17 @@ import { Box, Toolbar, Stack } from '@mui/material';
 import VerticalNavbar from './drawer/VerticalNavbar';
 import TopBar from './topbar/TopBar';
 import Footer from './footer/Footer';
+import Alerts from '../../components/sections/dashboard/statistics/Alerts'; // Import Alerts
 
 const drawerWidth = 248;
 
 const MainLayout = ({ children }: PropsWithChildren) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const [alerts, setAlerts] = useState<string[]>([]); // Define alerts state
+
+  // Hardcoded logged-in user index (replace with actual logic)
+  const loggedInIndex = 30; // Example: Parent with index 30
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -27,7 +32,8 @@ const MainLayout = ({ children }: PropsWithChildren) => {
 
   return (
     <Stack direction="row">
-      <TopBar drawerWidth={drawerWidth} onHandleDrawerToggle={handleDrawerToggle} />
+      {/* Pass alerts to TopBar */}
+      <TopBar drawerWidth={drawerWidth} onHandleDrawerToggle={handleDrawerToggle} alerts={alerts} />
       <VerticalNavbar
         drawerWidth={drawerWidth}
         mobileOpen={mobileOpen}
@@ -45,6 +51,9 @@ const MainLayout = ({ children }: PropsWithChildren) => {
         })}
       >
         <Toolbar />
+        {/* Render Alerts component */}
+        <Alerts loggedInIndex={loggedInIndex} setAlerts={setAlerts} />{' '}
+        {/* Pass loggedInIndex and setAlerts */}
         {children}
         <Footer />
       </Box>

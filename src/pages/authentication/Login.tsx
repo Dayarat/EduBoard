@@ -30,15 +30,19 @@ const Login = () => {
   const { register, handleSubmit } = useForm<LoginFormValues>();
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<LoginFormValues> = (data) => {
-    if (data.email === 'teacher@gmail.com' && data.password === '12345678') {
-      navigate('/dashboard', { state: { index: undefined } });
-    } else if (data.email === 'student20@gmail.com' && data.password === '12345678') {
-      navigate('/dashboard', { state: { index: 20 } });
-    } else if (data.email === 'parent30@gmail.com' && data.password === '12345678') {
-      navigate('/dashboard', { state: { index: 30 } });
-    } else if (data.email === 'test@gmail.com' && data.password === '12345678') {
-      navigate('/dashboard', { state: { index: undefined } });
+  const handleLogin: SubmitHandler<LoginFormValues> = (data) => {
+    const { email, password } = data;
+
+    if (email === 'parent30@gmail.com' && password === '12345678') {
+      navigate('/dashboard', { state: { index: 30 } }); // Pass index 30 for parent
+    } else if (email === 'student20@gmail.com' && password === '12345678') {
+      navigate('/dashboard', { state: { index: 20 } }); // Pass index 20 for student
+    } else if (email === 'teacher@gmail.com' && password === '12345678') {
+      navigate('/dashboard', { state: { index: undefined } }); // No specific index for teacher
+    } else if (email === 'test@gmail.com' && password === '12345678') {
+      navigate('/dashboard', { state: { index: undefined } }); // No specific index for test
+    } else {
+      alert('Invalid email or password'); // Handle invalid login
     }
   };
 
@@ -82,7 +86,8 @@ const Login = () => {
 
       <Divider>or</Divider>
 
-      <Box component="form" onSubmit={handleSubmit(onSubmit)}>
+      {/* Integrate handleLogin into the form submission */}
+      <Box component="form" onSubmit={handleSubmit(handleLogin)}>
         <Paper sx={(theme) => ({ padding: theme.spacing(2.5), my: 3, boxShadow: 1 })}>
           <Grid container spacing={2.5}>
             <Grid item xs={12}>
