@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Snackbar, Alert } from '@mui/material';
-import Papa from 'papaparse';
 import { IReminderData } from '../ReminderTable';
+import { parseCSV } from '../../../../data/util/getData';
 
 interface AlertsProps {
   loggedInIndex: number; // Logged-in user's index (student ID)
@@ -13,6 +13,7 @@ const Alerts = ({ loggedInIndex, setAlerts }: AlertsProps) => {
   const [alerts, setLocalAlerts] = useState<string[]>([]); // Local state for alerts
 
   // Function to check and trigger alerts
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const checkAlerts = (data: IReminderData[]) => {
     const newAlerts: string[] = [];
 
@@ -27,13 +28,13 @@ const Alerts = ({ loggedInIndex, setAlerts }: AlertsProps) => {
     if (loggedInUser) {
       // Generate alerts based on the user's data
       if (loggedInUser.stress === 'High') {
-        newAlerts.push(`ALERT: ${loggedInUser.student} has a HIGH stress level!`);
+        newAlerts.push(`ALERT: Your child has a HIGH stress level!`);
       }
       if (parseFloat(loggedInUser.study) > 8) {
-        newAlerts.push(`Warning: ${loggedInUser.student} is studying more than 8 hours!`);
+        newAlerts.push(`Warning: Your child is studying more than 8 hours!`);
       }
       if (parseFloat(loggedInUser.sleep) < 5) {
-        newAlerts.push(`Warning: ${loggedInUser.student} is sleeping less than 5 hours!`);
+        newAlerts.push(`Warning: Your child is sleeping less than 5 hours!`);
       }
     }
 
@@ -47,21 +48,13 @@ const Alerts = ({ loggedInIndex, setAlerts }: AlertsProps) => {
   };
 
   useEffect(() => {
-    // Fetch or use the dataset dynamically
     const fetchData = async () => {
       try {
-        const response = await fetch('../../../../../public/student_lifestyle_dataset.csv'); // Replace with your dataset path
-        const text = await response.text();
-        console.log('Raw Dataset Text:', text); // Debug: Log the raw dataset text
+        const parsedData = await parseCSV('/student_lifestyle_dataset.csv', 30);
 
-        const parsedData = Papa.parse<IReminderData>(text, { header: true }).data;
-        console.log('Parsed Dataset:', parsedData); // Debug: Log the parsed dataset
+        console.log('Parsed Dataset:', parsedData);
 
-        // Filter out empty rows (if any)
-        const filteredData = parsedData.filter((row) => row.id);
-        console.log('Filtered Dataset:', filteredData); // Debug: Log the filtered dataset
-
-        checkAlerts(filteredData); // Check alerts for the logged-in user
+        checkAlerts(parsedData);
       } catch (error) {
         console.error('Error fetching dataset:', error);
       }
