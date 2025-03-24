@@ -33,16 +33,26 @@ const Login = () => {
   const handleLogin: SubmitHandler<LoginFormValues> = (data) => {
     const { email, password } = data;
 
+    // Clear previous session data
+    sessionStorage.removeItem('userIndex');
+
     if (email === 'parent30@gmail.com' && password === '12345678') {
-      navigate('/dashboard', { state: { index: 30 } }); // Pass index 30 for parent
+      sessionStorage.setItem('userIndex', '30'); // Store as string
+      navigate('/dashboard', { state: { index: 30 } });
     } else if (email === 'student20@gmail.com' && password === '12345678') {
-      navigate('/dashboard', { state: { index: 20 } }); // Pass index 20 for student
+      sessionStorage.setItem('userIndex', '20');
+      navigate('/dashboard', { state: { index: 20 } });
     } else if (email === 'teacher@gmail.com' && password === '12345678') {
-      navigate('/dashboard', { state: { index: undefined } }); // No specific index for teacher
+      // No index needed for teacher
+      navigate('/dashboard');
+    } else if (email === 'student13@gmail.com' && password === '12345678') {
+      sessionStorage.setItem('userIndex', '13');
+      navigate('/dashboard', { state: { index: 13 } });
     } else if (email === 'test@gmail.com' && password === '12345678') {
-      navigate('/dashboard', { state: { index: undefined } }); // No specific index for test
+      // No index needed for test user
+      navigate('/dashboard');
     } else {
-      alert('Invalid email or password'); // Handle invalid login
+      alert('Invalid email or password');
     }
   };
 

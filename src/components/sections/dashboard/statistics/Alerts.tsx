@@ -4,13 +4,16 @@ import { IReminderData } from '../ReminderTable';
 import { parseCSV } from '../../../../data/util/getData';
 
 interface AlertsProps {
-  loggedInIndex: number; // Logged-in user's index (student ID)
   setAlerts: (alerts: string[]) => void; // Function to update alerts in the parent component
 }
 
-const Alerts = ({ loggedInIndex, setAlerts }: AlertsProps) => {
+const Alerts = ({ setAlerts }: AlertsProps) => {
   const [openAlert, setOpenAlert] = useState(false);
   const [alerts, setLocalAlerts] = useState<string[]>([]); // Local state for alerts
+
+  // Get user index from sessionStorage
+  const userIndex = sessionStorage.getItem('userIndex');
+  const loggedInIndex = userIndex ? parseInt(userIndex) : undefined;
 
   // Function to check and trigger alerts
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -50,9 +53,9 @@ const Alerts = ({ loggedInIndex, setAlerts }: AlertsProps) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const parsedData = await parseCSV('/student_lifestyle_dataset.csv', 30);
+        const parsedData = await parseCSV('/student_lifestyle_dataset.csv', loggedInIndex);
 
-        console.log('Parsed Dataset:', parsedData);
+        console.log('Parsed Dataset from alert:', parsedData);
 
         checkAlerts(parsedData);
       } catch (error) {

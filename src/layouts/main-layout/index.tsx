@@ -4,18 +4,13 @@ import VerticalNavbar from './drawer/VerticalNavbar';
 import TopBar from './topbar/TopBar';
 import Footer from './footer/Footer';
 import Alerts from '../../components/sections/dashboard/statistics/Alerts'; // Import Alerts
-import { useLocation } from 'react-router-dom';
 
 const drawerWidth = 248;
 
 const MainLayout = ({ children }: PropsWithChildren) => {
-  const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [alerts, setAlerts] = useState<string[]>([]); // Define alerts state
-
-  // Hardcoded logged-in user index (replace with actual logic)
-  const loggedInIndex = location.state?.index; // Example: Parent with index 30
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -54,8 +49,7 @@ const MainLayout = ({ children }: PropsWithChildren) => {
       >
         <Toolbar />
         {/* Render Alerts component */}
-        <Alerts loggedInIndex={loggedInIndex} setAlerts={setAlerts} />{' '}
-        {/* Pass loggedInIndex and setAlerts */}
+        <Alerts setAlerts={setAlerts} /> {/* Pass loggedInIndex and setAlerts */}
         {children}
         <Footer />
       </Box>

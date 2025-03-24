@@ -11,6 +11,8 @@ const Dashboard = lazy(() => import('pages/dashboard/Dashboard'));
 const Login = lazy(() => import('pages/authentication/Login'));
 const Signup = lazy(() => import('pages/authentication/Signup'));
 const ErrorPage = lazy(() => import('pages/errors/ErrorPage'));
+const Recommendations = lazy(() => import('pages/dashboard/Recommendations'));
+const Message = lazy(() => import('pages/dashboard/Message'));
 
 import { Navigate } from 'react-router-dom';
 
@@ -41,7 +43,7 @@ const routes = [
         ],
       },
       {
-        path: rootPaths.dashboard,
+        path: paths.dashboard,
         element: (
           <MainLayout>
             <Suspense fallback={<LinearLoader />}>
@@ -53,6 +55,38 @@ const routes = [
           {
             index: true,
             element: <Dashboard />,
+          },
+        ],
+      },
+      {
+        path: paths.recommendation,
+        element: (
+          <MainLayout>
+            <Suspense fallback={<LinearLoader />}>
+              <Outlet />
+            </Suspense>
+          </MainLayout>
+        ),
+        children: [
+          {
+            index: true,
+            element: <Recommendations />,
+          },
+        ],
+      },
+      {
+        path: paths.messages,
+        element: (
+          <MainLayout>
+            <Suspense fallback={<LinearLoader />}>
+              <Outlet />
+            </Suspense>
+          </MainLayout>
+        ),
+        children: [
+          {
+            index: true,
+            element: <Message />,
           },
         ],
       },

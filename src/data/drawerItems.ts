@@ -10,7 +10,8 @@ import Settings from 'components/icons/drawer/Settings';
 // import ShoppingBag from 'components/icons/drawer/ShoppingBag';
 // import ShoppingCart from 'components/icons/drawer/ShoppingCart';
 import SignOut from 'components/icons/drawer/SignOut';
-import paths, { rootPaths } from 'routes/paths';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import paths from 'routes/paths';
 import { DrawerItem } from 'types/types';
 
 export const drawerItems: DrawerItem[] = [
@@ -18,7 +19,7 @@ export const drawerItems: DrawerItem[] = [
     id: 1,
     icon: Grid,
     title: 'Dashboard',
-    path: rootPaths.root,
+    path: paths.dashboard,
     collapsible: false,
     active: true,
   },
@@ -36,9 +37,10 @@ export const drawerItems: DrawerItem[] = [
   {
     id: 7,
     icon: Fencing,
-    title: 'Services',
-    path: '#!',
+    title: 'Recommendation',
+    path: paths.recommendation,
     collapsible: false,
+    active: true,
   },
   {
     id: 8,
@@ -51,8 +53,9 @@ export const drawerItems: DrawerItem[] = [
     id: 9,
     icon: Comment,
     title: 'Messages',
-    path: '#!',
+    path: paths.messages,
     collapsible: false,
+    active: true,
   },
   {
     id: 10,

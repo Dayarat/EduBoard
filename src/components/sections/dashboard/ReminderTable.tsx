@@ -57,6 +57,8 @@ const ReminderTable: React.FC<ReminderTableProps> = ({ rows }) => {
     gpa: '',
     stress: '',
   });
+  const userIndex = sessionStorage.getItem('userIndex');
+  const loggedInIndex = userIndex ? parseInt(userIndex) : undefined;
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -84,6 +86,7 @@ const ReminderTable: React.FC<ReminderTableProps> = ({ rows }) => {
           color="secondary"
           startIcon={<IconifyIcon icon="heroicons-solid:plus" />}
           onClick={handleOpen}
+          disabled={Boolean(loggedInIndex)}
         >
           <Typography variant="body2">Add New</Typography>
         </Button>
