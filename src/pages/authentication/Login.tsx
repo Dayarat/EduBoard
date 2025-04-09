@@ -39,13 +39,13 @@ const Login = () => {
     if (email === 'parent30@gmail.com' && password === '12345678') {
       sessionStorage.setItem('userIndex', '30'); // Store as string
       navigate('/dashboard', { state: { index: 30 } });
-    } else if (email === 'student20@gmail.com' && password === '12345678') {
+    } else if (email === 'parent20@gmail.com' && password === '12345678') {
       sessionStorage.setItem('userIndex', '20');
       navigate('/dashboard', { state: { index: 20 } });
     } else if (email === 'teacher@gmail.com' && password === '12345678') {
       // No index needed for teacher
       navigate('/dashboard');
-    } else if (email === 'student13@gmail.com' && password === '12345678') {
+    } else if (email === 'parent13@gmail.com' && password === '12345678') {
       sessionStorage.setItem('userIndex', '13');
       navigate('/dashboard', { state: { index: 13 } });
     } else if (email === 'test@gmail.com' && password === '12345678') {
